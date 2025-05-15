@@ -1,0 +1,169 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to bottom right, #2e1065, #312e81, #0f172a);
+    padding: 1rem;
+}
+
+.game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    width: 100%;
+    max-width: 600px;
+}
+
+.header {
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    background: linear-gradient(to right, #d8b4fe, #f9a8d4, #a5b4fc);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 1rem;
+}
+
+p {
+    color: #c7d2fe;
+    font-size: 1.1rem;
+}
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    padding: 1.5rem;
+    background-color: rgba(49, 46, 129, 0.5);
+    border-radius: 0.75rem;
+    backdrop-filter: blur(4px);
+}
+
+.card {
+    width: 6rem;
+    height: 6rem;
+    position: relative;
+    perspective: 1000px;
+    cursor: pointer;
+}
+
+@media (min-width: 768px) {
+    .card {
+        width: 8rem;
+        height: 8rem;
+    }
+    
+    .cards-grid {
+        gap: 1.5rem;
+    }
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.3s;
+    border-radius: 0.5rem;
+    border: 1px solid #4338ca;
+    background-color: #1e1b4b;
+}
+
+.card-inner:hover {
+    border-color: #4f46e5;
+    background-color: rgba(49, 46, 129, 0.8);
+}
+
+.card.flipped .card-inner {
+    transform: rotateY(180deg);
+    background-color: rgba(49, 46, 129, 0.5);
+    border-color: rgba(99, 102, 241, 0.5);
+}
+
+.card.matched .card-inner {
+    background-color: rgba(49, 46, 129, 0.5);
+    border-color: rgba(99, 102, 241, 0.5);
+}
+
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.card-front {
+    background: linear-gradient(to bottom right, transparent, rgba(99, 102, 241, 0.05), rgba(255, 255, 255, 0.05));
+}
+
+.card-back {
+    transform: rotateY(180deg);
+}
+
+.card-icon {
+    width: 3rem;
+    height: 3rem;
+}
+
+.card.matched .card-icon {
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3));
+}
+
+.reset-button {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    background-color: #1e1b4b;
+    color: #c7d2fe;
+    border: 1px solid #4338ca;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.reset-button:hover {
+    background-color: #312e81;
+    border-color: #6366f1;
+    color: #e0e7ff;
+}
+
+.toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #4c1d95;
+    color: #e9d5ff;
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+    border: 1px solid #7e22ce;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    opacity: 1;
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.toast.hidden {
+    opacity: 0;
+    transform: translateX(-50%) translateY(1rem);
+    pointer-events: none;
+}
